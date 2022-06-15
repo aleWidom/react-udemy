@@ -11,12 +11,24 @@ const GifExpertApp = () => {
 
     const [categories, setCategories] = useState(["Los Simpsons"])
 
-    const [array, setArray] = useState([1, 2, 3, 4, 5, 67, 8])
+    const onNewCategory = (value) => {
+         if (categories.includes(value)){
+            return
+         } else {
+            setCategories([...categories, value]) 
+         }
+    }
+ 
+    console.log(categories)
 
-    useEffect(() => {
+
+
+/*     const [array, setArray] = useState([1, 2, 3, 4, 5, 67, 8]) */
+
+   /*  useEffect(() => {
         console.log('hola')
         setCategories(['Chavo'])
-    }, [categories])
+    }, [categories]) */
 
 
     /*  const handleAdd = () => (
@@ -31,16 +43,14 @@ const GifExpertApp = () => {
       )*/
 
 
-    const prueba = () => setArray([...array, "R"])
+/*     const prueba = () => setArray([...array, "R"]) */
 
 
     return (
         <>
             <h2>GifExpertApp</h2>
-            <AddCategory setCategories={setCategories} />
+            <AddCategory onNewCategory={onNewCategory}/>
             <hr />
-            <small>{array}</small>
-            <button onClick={prueba}></button>
             <ol>
                 {categories.map((category) => (
                     <GifGrid key={category} category={category} />

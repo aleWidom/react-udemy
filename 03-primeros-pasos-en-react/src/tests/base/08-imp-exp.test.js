@@ -3,7 +3,7 @@ import heroes from "../../data/heroes";
 import "@testing-library/jest-dom"
 
 
-describe ("Pruebas en funciones de heroes", () => {
+describe ("PruebasEnFuncionesDeHeroes", () => {
     test('Debe de retornar un heroe por id', () => {
         
         const id = 1;
@@ -24,40 +24,29 @@ describe ("Pruebas en funciones de heroes", () => {
 
         const heroe = getHeroeById(id);
 
-        expect(undefined).toBe(heroe);
+        expect(undefined).toBe(heroe);    
+    }),
+    test('arreglosHeroesDcAndLenght', () => { 
 
-    
-    })
+        const heroesDc = getHeroesByOwner('DC')
 
-    test('debe retornar un nuevo arreglo que contenga los heroes de Dc, utilizando toEqual ', () => {
-        
-        const owner = "DC";
+        expect(heroesDc).toEqual( [
+            { id: 1, name: 'Batman', owner: 'DC' },
+            { id: 3, name: 'Superman', owner: 'DC' },
+            { id: 4, name: 'Flash', owner: 'DC' }
+          ])
+        expect(heroesDc.length).toBe(3)
+    }),
+    test('arreglosHeroes MarvelAndLenght', () => { 
 
-        const heroesByOwner = getHeroesByOwner(owner);
+        const heroesDc = getHeroesByOwner('Marvel');
 
+        expect(heroesDc).toEqual( [
+            { id: 2, name: 'Spiderman', owner: 'Marvel' },
+            { id: 5, name: 'Wolverine', owner: 'Marvel' }
+          ])
 
-        const heroesDc = heroes.filter((e)=> (
-            e.owner === owner
-        ))
+        expect(heroesDc.length).toBe(2)  
 
-        expect(heroesByOwner).toEqual(heroesDc);
-
-    })
-
-    test('Debo utilizar un toBe, y debe coincidir la longitud del array', () => {
-        
-        const owner = "Marvel";
-
-        const heroesByOwner = getHeroesByOwner(owner);
-
-        const heroesDc = heroes.filter((e)=> (
-            e.owner === owner
-        ))
-
-        expect(heroesByOwner.length).toBe(heroesDc.length)
-
-    })
-    
-    
-    
+     })    
 })

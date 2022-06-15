@@ -1,8 +1,8 @@
 import React from "react"; //para poder usar etiquetas hay que importar react
 
 import ReactDom from "react-dom"; //usar cosas para el dom (web)
-import CounterApp from "./CounterApp";
-//import PrimeraApp from "./PrimeraApp";
+import CounterApp from "./CounterApp"; 
+/* import FirstApp from "./FirstApp" */
 
 import './index.css'
 

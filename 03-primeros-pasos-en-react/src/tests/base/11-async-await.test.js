@@ -1,18 +1,18 @@
-import "@testing-library/jest-dom"
-import { getImagen } from "../../base/11-async-await"
+import "@testing-library/jest-dom"
+import { getImagen } from "../../base/11-async-await"
 
 
-describe ("Pruebas con async-await", () => {
-    test('Debe de retornar el url de la imagen', async () => {
-        
-      const url = await getImagen();
+describe("Pruebas con async-await", () => {
+    test('Debe de retornar el url de la imagen', async () => {
 
-      console.log(url)
+        const url = await getImagen();
 
-      expect(typeof url).toBe("string")
+        console.log(url)
 
-    })
+        expect(typeof url).toBe("string")
 
-    
-    
+    })
+
+
+
 })

@@ -1,85 +1,56 @@
-import React from 'react'
-import '@testing-library/jest-dom'
-import { shallow } from 'enzyme';
-import CounterApp from "../CounterApp";
-import { expect } from '@jest/globals';
+import { render, screen, fireEvent } from "@testing-library/react"
+import CounterApp from "../CounterApp"
+
 
 
 describe('Pruebas en <CounterApp />', () => {
 
-  //hago esto para no perder el intelligent de vscode, podría hacer tranquilamente let wrapper; pero así pierdo el intelligent de vscode
-    let wrapper = shallow(<CounterApp />);
+   const valor = 100;
+   const initialValue = 10
 
-    beforeEach( () =>
-        
-         wrapper = shallow(<CounterApp />)
+   test('snapshot', () => {
+      const { container } = render(<CounterApp />)
+      expect(container).toMatchSnapshot()
+   });
 
-        )
+   test('debeRegresar100', () => {
 
-    
-    test('Debe de mostrar <CounterApp /> correctamente', () => {
-    //shallow similar al render de arriba pero me va a dar más opciones
+      render(<CounterApp value={valor} />)
+      expect(screen.getByText(valor)).toBeTruthy()
+   });
 
+   test('debeDeIncrementar+1', () => {
+      //renderiza el componente digamos 
+      render(<CounterApp value={initialValue} />)
 
-       expect(wrapper).toMatchSnapshot();   
-    })
+      //el fireEvent simula eventos
+      fireEvent.click(screen.getByText('+1'));
+      //el screen es como la captura de lo que renderiza por lo que entendi
+      expect(screen.getByText('11')).toBeTruthy()
+   });
 
-    test('Debe de mostrar <CounterApp /> con valor 100', () => {
-        //shallow similar al render de arriba pero me va a dar más opciones
-    
-            wrapper = shallow(<CounterApp value={100}/>);
+   test('debeDeDecrementar-1', () => {
+      render(<CounterApp value={initialValue} />)
+      //screen debug me deja ver como está el componenente en ese momento
+      screen.debug()
+      fireEvent.click(screen.getByText('-1'));
+      //screen debug me deja ver como está el componenente en ese momento
+      screen.debug()
+      expect(screen.getByText('9')).toBeTruthy()
+   });
 
-            const valorCounterApp = wrapper.find('h2').text().trim()
+   test('debeFuncionarReset', () => {
+      render(<CounterApp value={initialValue} />)
+      fireEvent.click(screen.getByText('+1'));
+      fireEvent.click(screen.getByText('+1'));
+      fireEvent.click(screen.getByText('+1'));
+/*       fireEvent.click(screen.getByText('Reset')); */
 
-            expect(valorCounterApp).toBe("100");
-           
-        })
-
-
-    test('Debe incrementar con el botón de +1 ', () => {
-        
-        wrapper.find('button').at(0).simulate("click"); //at indica posición  //simulate (simula el click)
-        
-        const valorCounterApp = wrapper.find('h2').text().trim();
-
-        expect(valorCounterApp).toBe("1")
-
-    })
-
-
-    test('Debe decrementar con el botón de -1 ', () => {
-
-        wrapper.find('button').at(2).simulate("click"); //at indica posición  //simulate (simula el click)
-        
-        const valorCounterApp = wrapper.find('h2').text().trim();
-
-        expect(valorCounterApp).toBe("-1")
-
-        
-
-    })
-        
-
-    test('Debe colocar el valor por defecto con el btn reset', () => {
-        
-        wrapper = shallow(<CounterApp value={105}/>);
-
-        wrapper.find('button').at(0).simulate("click"); //at indica posición  //simulate (simula el click)
-        
-        const valorIncrementoEn1 = wrapper.find('h2').text().trim();
-
-        console.log(valorIncrementoEn1);
-
-        wrapper.find('button').at(1).simulate("click");
-
-        const valorReset = wrapper.find('h2').text().trim()
-        
-        expect(valorReset).toBe("105")
-       
-    })
-    
-
-        
-    
+      //para mi una mejor forma para que no ocurra errores a futuro
+      /* screen.getByRole busco a través de etiqueta */
+      fireEvent.click(screen.getByRole('button', {name:'btn-reset'} ))
+      expect(screen.getByRole('heading', {level:2}, {name:'counter'} )).toBeTruthy()
+      expect(screen.getByRole('heading', {level:2}, {name:'counter'} ).innerHTML).toContain(initialValue)
+   });
 
 })
