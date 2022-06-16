@@ -1,7 +1,6 @@
 
-import React, { useState, useEffect } from "react";
-import AddCategory from "./components/AddCategory";
-import { GifGrid } from "./components/GifGrid";
+import React, { useState} from "react";
+import {AddCategory, GifGrid} from "./components";
 import "./index.css"
 
 
@@ -18,33 +17,6 @@ const GifExpertApp = () => {
             setCategories([...categories, value]) 
          }
     }
- 
-    console.log(categories)
-
-
-
-/*     const [array, setArray] = useState([1, 2, 3, 4, 5, 67, 8]) */
-
-   /*  useEffect(() => {
-        console.log('hola')
-        setCategories(['Chavo'])
-    }, [categories]) */
-
-
-    /*  const handleAdd = () => (
-          //Dos formas de hacerlo:
-  
-          //setCategories([...categories, "X Men"]) 
-      
-          //o setCategories puede recibir un callback en el que el argumneto es el state anterior
-  
-          setCategories((cats) => [...cats, "X Men"])
-          
-      )*/
-
-
-/*     const prueba = () => setArray([...array, "R"]) */
-
 
     return (
         <>

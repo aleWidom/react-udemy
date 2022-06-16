@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
-/* import PropTypes from 'prop-types'; */
 
 //COMPONENTE DEBE TENER UNA UNICA TAREA ESPECIFICA Y SE OCUPE BIEN DE ELLA
-const AddCategory = ({onNewCategory}) => {
+export const AddCategory = ({onNewCategory}) => {
     
     const [inputValue, setInputValue] = useState("")
     
@@ -30,4 +29,3 @@ const AddCategory = ({onNewCategory}) => {
 }
 
 
-export default AddCategory;
