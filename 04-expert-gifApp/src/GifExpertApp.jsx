@@ -28,7 +28,6 @@ const GifExpertApp = () => {
                     <GifGrid key={category} category={category} />
                 ))}
             </ol>
-            <h3>Hola</h3>
         </>
     );
 }
