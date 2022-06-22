@@ -6,8 +6,9 @@ import { useFetchGifs } from '../../hooks/useFetchGifs'
 describe('pruebasUseFetchGifsHook', () => {
     test('debeDeRegresarElEstadoInicial', () => {
         const { result } = renderHook(() => useFetchGifs('One Punch'))
-        const { images, loading } = result.content
-        expect(images).toBe(0)
+        console.log(result)
+        const { images, loading } = result.current
+        expect(images.length).toBe(0)
         expect(loading).toBeTruthy()
     })
 
@@ -20,7 +21,7 @@ describe('pruebasUseFetchGifsHook', () => {
             { timeout: 1000 }
         )
 
-        const { images, loading } = result.content
+        const { images, loading } = result.current
         expect(images.length).toBeGreaterThan(0);
         expect(loading).toBeFalsy();
 
