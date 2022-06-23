@@ -1,14 +1,13 @@
 
 import { useState} from "react";
+import PropTypes from 'prop-types';
 import {AddCategory, GifGrid} from "./components";
-import "./index.css"
 
-
-const GifExpertApp = () => {
+export const GifExpertApp = ({categoryInicial}) => {
 
     //cuando utilice el setCategories, y esto cambie react renderiza nuevamente el componente y va a mostrar los cambios.
 
-    const [categories, setCategories] = useState(["Los Simpsons"])
+    const [categories, setCategories] = useState([categoryInicial])
 
     const onNewCategory = (value) => {
          if (categories.includes(value)){
@@ -32,4 +31,7 @@ const GifExpertApp = () => {
     );
 }
 
-export default GifExpertApp;
+GifExpertApp.propTypes = {
+    categoryInicial: PropTypes.array.isRequired,
+  };
+  

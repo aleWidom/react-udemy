@@ -6,8 +6,8 @@ export const useCounter = (initialValue = 10) => {
     const [counter, setCounter] = useState(initialValue);
 
     const increment = (event,value) => {
-        console.log(event)
-        console.log(value)
+  /*       console.log(event)
+        console.log(value) */
         setCounter(counter + value)
     }
 
