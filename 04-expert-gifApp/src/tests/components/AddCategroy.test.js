@@ -44,7 +44,6 @@ describe('pruebasEnAddCategory', () => {
     })
 
     test('debeLlamarseLaFuncionOnNewCategorySiElInputValueEsMayorA1', async () => {
-        const inputValue = 'Saitama';
 
         //es una funciòn mock que nos oferce jest
         const onNewCategory = jest.fn()
@@ -53,8 +52,9 @@ describe('pruebasEnAddCategory', () => {
         const input = screen.getByRole('textbox');
         const form = screen.getByRole('form');
 
-        fireEvent.input(input, { target: { value: inputValue } })
+        fireEvent.input(input, { target: { value: 'Saitama' } })
         fireEvent.submit(form)
+        screen.debug()
 
         //este metodo nos permite saber si fue llamada la funciòn
         expect(onNewCategory).toHaveBeenCalled()
@@ -62,7 +62,7 @@ describe('pruebasEnAddCategory', () => {
         expect(onNewCategory).toHaveBeenCalledTimes(1)
 
         //esto para decirle con que valor se espera que sea llamada
-        expect(onNewCategory).toHaveBeenCalledWith(inputValue)
+        expect(onNewCategory).toHaveBeenCalledWith('Saitama')
     })
 
     test('noDebeLlamarseLaFuncionOnNewCategorySiElInputValueEsMayorA1', async () => {
