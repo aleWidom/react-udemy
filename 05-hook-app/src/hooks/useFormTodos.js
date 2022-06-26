@@ -1,33 +1,29 @@
 import { useState } from "react"
 
-export const useFormTodos = (todos) => {
+export const useFormTodos = (handleNewTodo) => {
 
     const [input, setInput] = useState('')
-    const [stateTodos, setTodos] = useState(todos)
 
     const onInputChange = (event) => {
         setInput(event.target.value)
     }
 
-    console.log(stateTodos)
-
     const onSubmitTodos = (event) => {
         event.preventDefault()
         if (input.length < 2) return;
-        setTodos([
-            ...stateTodos,
-            {
-                id: new Date().getTime(),
-                description: input,
-                done: false
-            }
-        ])
+
+        const newTodo = {
+            id: new Date().getTime(),
+            description: input,
+            done: false
+        }
         setInput('')
+        handleNewTodo(newTodo)
     }
 
     return {
         input,
         onInputChange,
-        onSubmitTodos
+        onSubmitTodos,
     }
 }
