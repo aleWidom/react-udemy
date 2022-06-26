@@ -19,8 +19,6 @@ export const TodoApp = () => {
 
     const [todos, dispatchTodo] = useReducer(todoReducer, initialState)
 
-    console.log(todos)
-
     return (
         <>
             <h1>TodoApp 10, <small>pendientes 2</small></h1>

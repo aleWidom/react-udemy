@@ -9,6 +9,8 @@ export const useFormTodos = (todos) => {
         setInput(event.target.value)
     }
 
+    console.log(stateTodos)
+
     const onSubmitTodos = (event) => {
         event.preventDefault()
         if (input.length < 2) return;
