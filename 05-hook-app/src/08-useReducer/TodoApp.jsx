@@ -1,38 +1,16 @@
-import React, { useReducer } from 'react'
+import { useTodos } from '../hooks/useTodos'
 import { TodoList, TodoAdd } from './components'
-import { todoReducer } from './TodoReducer'
 
 export const TodoApp = () => {
 
-    const initialState = [
-        {
-            id: new Date().getTime(),
-            description: 'Recolectar la piedra del alma',
-            done: false
-        },
-        {
-            id: new Date().getTime() * 3,
-            description: 'Recolectar la piedra del poder',
-            done: false
-        }
-    ]
-
-    const [todos, dispatchTodo] = useReducer(todoReducer, initialState)
-
-    const handleNewTodo = (todo) => {
-        const action = {
-            type: '[TODO] Add Todo',
-            payload: todo
-        }
-        dispatchTodo(action)
-    }
+    const { todos, todosCount, pendingTodosCount, handleNewTodo, handleDeleteTodo, handleUpdatedDone } = useTodos()
 
     return (
         <>
-            <h1>TodoApp 10, <small>pendientes 2</small></h1>
+            <h1>TodoApp {todosCount}, <small>pendientes {pendingTodosCount}</small></h1>
             <hr />
             <div>
-                <TodoList todos={todos} />
+                <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} handleUpdatedDone={handleUpdatedDone} />
             </div>
             <div>
                 <h4>Agregar TODO</h4>
